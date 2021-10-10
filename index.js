@@ -1,10 +1,5 @@
 import { ObjectID } from 'mongodb';
 
-const basename = function(path) {
-   return path.split('/').reverse()[0];
-};
-const getString = value => (value || '').toString();
-
 const getDateIfValid = value => {
 	const date = Date.parse(value);
 	return isNaN(date) ? null : new Date(date);
