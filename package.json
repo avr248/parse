@@ -1,5 +1,5 @@
 {
-  "name": "parse",
+  "name": "useful",
   "version": "0.1.0",
   "description": "Useful functions and more",
   "main": "index.js",
@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "parse"
+    "url": "useful"
   },
   "keywords": [
-    "parse",
+    "useful",
     "js",
     "tools"
   ],
