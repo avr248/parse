@@ -27,7 +27,6 @@ export const getBooleanIfValid = (value, defaultValue = null) => {
 		return typeof value === 'boolean' ? value : defaultValue;
 	}
 };
-
 export const getBrowser = browser => {
 	return browser
 		? {
@@ -49,33 +48,72 @@ export const getCustomerAddress = address => {
 		coordinates.latitude = address.coordinates.latitude;
 		coordinates.longitude = address.coordinates.longitude;
 	}
-    try {
-        const mongodb = require('mongodb');
-        return mongodb && address
-            ? {
-                    id: new mongodb.ObjectID(),
-                    full_name: getString(address.full_name),
-                    address1: getString(address.address1),
-                    address2: getString(address.address2),
-                    city: getString(address.city),
-                    country: getString(address.country).toUpperCase(),
-                    postal_code: getString(address.postal_code),
-                    state: getString(address.state),
-                    phone: getString(address.phone),
-                    company: getString(address.company),
-                    tax_number: getString(address.tax_number),
-                    coordinates: coordinates,
-                    details: address.details,
-                    default_billing: false,
-                    default_shipping: false
-            }
-            : {};
-    } catch (error) {
-        console.log(error)
-    }
-    
+	return address
+		? {
+				full_name: getString(address.full_name),
+				address1: getString(address.address1),
+				address2: getString(address.address2),
+				city: getString(address.city),
+				country: getString(address.country).toUpperCase(),
+				postal_code: getString(address.postal_code),
+				state: getString(address.state),
+				phone: getString(address.phone),
+				company: getString(address.company),
+				tax_number: getString(address.tax_number),
+				coordinates: coordinates,
+				details: address.details,
+				default_billing: false,
+				default_shipping: false
+		  }
+		: {};
 };
+export const getOrderAddress = address => {
+	let coordinates = {
+		latitude: '',
+		longitude: ''
+	};
 
+	if (address && address.coordinates) {
+		coordinates.latitude = address.coordinates.latitude;
+		coordinates.longitude = address.coordinates.longitude;
+	}
+
+	const emptyAddress = {
+		full_name: '',
+		address1: '',
+		address2: '',
+		city: '',
+		country: '',
+		postal_code: '',
+		state: '',
+		phone: '',
+		company: '',
+		tax_number: '',
+		coordinates: coordinates,
+		details: null
+	};
+
+	return address
+		? Object.assign(
+				{},
+				{
+					full_name: getString(address.full_name),
+					address1: getString(address.address1),
+					address2: getString(address.address2),
+					city: getString(address.city),
+					country: getString(address.country).toUpperCase(),
+					postal_code: getString(address.postal_code),
+					state: getString(address.state),
+					phone: getString(address.phone),
+					company: getString(address.company),
+					tax_number: getString(address.tax_number),
+					coordinates: coordinates,
+					details: address.details
+				},
+				address
+		  )
+		: emptyAddress;
+};
 export const basename = function(path) {
    return path.split('/').reverse()[0];
 };
@@ -264,65 +302,9 @@ const calc = {
 export const cl = function(msg) {
     console.log('msg', msg)
 }
-const getObjectIDIfValid = value => {
-    try {
-        const mongodb = require('mongodb');
-	    return mongodb && mongodb.ObjectID.isValid(value) ? new ObjectID(value) : null;
-    } catch (error) {
-        console.log(error)
-    }
-};
-const getOrderAddress = address => {
-	let coordinates = {
-		latitude: '',
-		longitude: ''
-	};
-
-	if (address && address.coordinates) {
-		coordinates.latitude = address.coordinates.latitude;
-		coordinates.longitude = address.coordinates.longitude;
-	}
-
-	const emptyAddress = {
-		full_name: '',
-		address1: '',
-		address2: '',
-		city: '',
-		country: '',
-		postal_code: '',
-		state: '',
-		phone: '',
-		company: '',
-		tax_number: '',
-		coordinates: coordinates,
-		details: null
-	};
-
-	return address
-		? Object.assign(
-				{},
-				{
-					full_name: getString(address.full_name),
-					address1: getString(address.address1),
-					address2: getString(address.address2),
-					city: getString(address.city),
-					country: getString(address.country).toUpperCase(),
-					postal_code: getString(address.postal_code),
-					state: getString(address.state),
-					phone: getString(address.phone),
-					company: getString(address.company),
-					tax_number: getString(address.tax_number),
-					coordinates: coordinates,
-					details: address.details
-				},
-				address
-		  )
-		: emptyAddress;
-};
 export default {
     basename,
 	getString,
-	getObjectIDIfValid,
 	getDateIfValid,
 	getArrayIfValid,
 	getArrayOfObjectID,
