@@ -28,8 +28,8 @@ export const getBooleanIfValid = (value, defaultValue = null) => {
 	}
 };
 export const getObjectIDIfValid = value => {
-    const ObjectID = require('mongodb').ObjectID;
-	return ObjectID.isValid(value) ? new ObjectID(value) : null;
+    const mongodb = require('mongodb');
+	return mongodb && mongodb.ObjectID.isValid(value) ? new ObjectID(value) : null;
 };
 export const getBrowser = browser => {
 	return browser
@@ -52,10 +52,10 @@ export const getCustomerAddress = address => {
 		coordinates.latitude = address.coordinates.latitude;
 		coordinates.longitude = address.coordinates.longitude;
 	}
-    const ObjectID = require('mongodb').ObjectID;
-	return address
+    const mongodb = require('mongodb');
+	return mongodb && address
 		? {
-				id: new ObjectID(),
+				id: new mongodb.ObjectID(),
 				full_name: getString(address.full_name),
 				address1: getString(address.address1),
 				address2: getString(address.address2),
