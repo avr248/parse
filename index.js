@@ -1,5 +1,3 @@
-import { ObjectID } from 'mongodb';
-
 const getDateIfValid = value => {
 	const date = Date.parse(value);
 	return isNaN(date) ? null : new Date(date);
@@ -30,6 +28,7 @@ const getBooleanIfValid = (value, defaultValue = null) => {
 	}
 };
 const getObjectIDIfValid = value => {
+    const ObjectID = require('mongodb').ObjectID;
 	return ObjectID.isValid(value) ? new ObjectID(value) : null;
 };
 const getBrowser = browser => {
@@ -53,7 +52,7 @@ const getCustomerAddress = address => {
 		coordinates.latitude = address.coordinates.latitude;
 		coordinates.longitude = address.coordinates.longitude;
 	}
-
+    const ObjectID = require('mongodb').ObjectID;
 	return address
 		? {
 				id: new ObjectID(),

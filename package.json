@@ -15,8 +15,5 @@
     "js",
     "tools"
   ],
-  "author": "avr248",
-  "dependencies": {
-    "mongodb": "^4.1.3"
-  }
+  "author": "avr248"
 }
