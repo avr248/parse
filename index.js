@@ -28,8 +28,12 @@ export const getBooleanIfValid = (value, defaultValue = null) => {
 	}
 };
 export const getObjectIDIfValid = value => {
-    const mongodb = require('mongodb');
-	return mongodb && mongodb.ObjectID.isValid(value) ? new ObjectID(value) : null;
+    try {
+        const mongodb = require('mongodb');
+	    return mongodb && mongodb.ObjectID.isValid(value) ? new ObjectID(value) : null;
+    } catch (error) {
+        console.log(error)
+    }
 };
 export const getBrowser = browser => {
 	return browser
@@ -52,26 +56,31 @@ export const getCustomerAddress = address => {
 		coordinates.latitude = address.coordinates.latitude;
 		coordinates.longitude = address.coordinates.longitude;
 	}
-    const mongodb = require('mongodb');
-	return mongodb && address
-		? {
-				id: new mongodb.ObjectID(),
-				full_name: getString(address.full_name),
-				address1: getString(address.address1),
-				address2: getString(address.address2),
-				city: getString(address.city),
-				country: getString(address.country).toUpperCase(),
-				postal_code: getString(address.postal_code),
-				state: getString(address.state),
-				phone: getString(address.phone),
-				company: getString(address.company),
-				tax_number: getString(address.tax_number),
-				coordinates: coordinates,
-				details: address.details,
-				default_billing: false,
-				default_shipping: false
-		  }
-		: {};
+    try {
+        const mongodb = require('mongodb');
+        return mongodb && address
+            ? {
+                    id: new mongodb.ObjectID(),
+                    full_name: getString(address.full_name),
+                    address1: getString(address.address1),
+                    address2: getString(address.address2),
+                    city: getString(address.city),
+                    country: getString(address.country).toUpperCase(),
+                    postal_code: getString(address.postal_code),
+                    state: getString(address.state),
+                    phone: getString(address.phone),
+                    company: getString(address.company),
+                    tax_number: getString(address.tax_number),
+                    coordinates: coordinates,
+                    details: address.details,
+                    default_billing: false,
+                    default_shipping: false
+            }
+            : {};
+    } catch (error) {
+        console.log(error)
+    }
+    
 };
 export const getOrderAddress = address => {
 	let coordinates = {
