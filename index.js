@@ -1,37 +1,37 @@
-const getDateIfValid = value => {
+export const getDateIfValid = value => {
 	const date = Date.parse(value);
 	return isNaN(date) ? null : new Date(date);
 };
-const getArrayIfValid = (value, def=null) => {
+export const getArrayIfValid = (value, def=null) => {
 	return Array.isArray(value) ? value : def;
 };
-const getArrayOfObjectID = value => {
+export const getArrayOfObjectID = value => {
 	if (Array.isArray(value) && value.length > 0) {
 		return value.map(id => getObjectIDIfValid(id)).filter(id => !!id);
 	} else {
 		return [];
 	}
 };
-const isNumber = value => !isNaN(parseFloat(value)) && isFinite(value);
+export const isNumber = value => !isNaN(parseFloat(value)) && isFinite(value);
 
-const getNumberIfValid = value => (isNumber(value) ? parseFloat(value) : null);
+export const getNumberIfValid = value => (isNumber(value) ? parseFloat(value) : null);
 
-const getNumberIfPositive = value => {
+export const getNumberIfPositive = value => {
 	const n = getNumberIfValid(value);
 	return n && n >= 0 ? n : null;
 };
-const getBooleanIfValid = (value, defaultValue = null) => {
+export const getBooleanIfValid = (value, defaultValue = null) => {
 	if (value === 'true' || value === 'false') {
 		return value === 'true';
 	} else {
 		return typeof value === 'boolean' ? value : defaultValue;
 	}
 };
-const getObjectIDIfValid = value => {
+export const getObjectIDIfValid = value => {
     const ObjectID = require('mongodb').ObjectID;
 	return ObjectID.isValid(value) ? new ObjectID(value) : null;
 };
-const getBrowser = browser => {
+export const getBrowser = browser => {
 	return browser
 		? {
 				ip: getString(browser.ip),
@@ -42,7 +42,7 @@ const getBrowser = browser => {
 				user_agent: ''
 		  };
 };
-const getCustomerAddress = address => {
+export const getCustomerAddress = address => {
 	let coordinates = {
 		latitude: '',
 		longitude: ''
@@ -73,7 +73,7 @@ const getCustomerAddress = address => {
 		  }
 		: {};
 };
-const getOrderAddress = address => {
+export const getOrderAddress = address => {
 	let coordinates = {
 		latitude: '',
 		longitude: ''
@@ -120,19 +120,19 @@ const getOrderAddress = address => {
 		  )
 		: emptyAddress;
 };
-const basename = function(path) {
+export const basename = function(path) {
    return path.split('/').reverse()[0];
 };
-const hasValue = function(val) {
+export const hasValue = function(val) {
     return val !== null && val !== undefined && val.toString().length > 0;
 }
-const hasArray = function(array) {
+export const hasArray = function(array) {
     return Array.isArray(array) && array.length && array.length > 0;
 }
-const hasObject = function(object) {
+export const hasObject = function(object) {
     return object !== null && object !== undefined && typeof(object) == 'object' && Object.keys(object).length > 0;
 }
-const forVal = function(obj, props=[], def=false) {
+export const forVal = function(obj, props=[], def=false) {
      let loopObj = obj;
      let respString;
     for(let i=0; i<props.length;i++){
@@ -146,7 +146,7 @@ const forVal = function(obj, props=[], def=false) {
         loopObj = respString;
     }
 }
-const getValue = function(obj, prop, def=false) {
+export const getValue = function(obj, prop, def=false) {
     let ret_val = false;
     if(obj){
         if(typeof(obj) == 'object'){
@@ -159,7 +159,7 @@ const getValue = function(obj, prop, def=false) {
     }
     return ret_val;
 }
-const getString = function(obj, prop) {
+export const getString = function(obj, prop) {
     let retStr = '';
     if(obj){
         if(typeof(obj) == 'object'){
@@ -172,7 +172,7 @@ const getString = function(obj, prop) {
     }
     return retStr;
 }
-const getBool = function(bool) {
+export const getBool = function(bool) {
     if(bool){
         if(bool == '1' || bool == 1 || bool == true || bool == 'true'){
             return true
@@ -183,7 +183,7 @@ const getBool = function(bool) {
     }
     return false
 }
-const getNum = function(num, def=0) {
+export const getNum = function(num, def=0) {
     if(bool){
         if(typeof(num) == 'number'){
             return parseInt(num);
@@ -191,7 +191,7 @@ const getNum = function(num, def=0) {
     }
     return def
 }
-const getObj = function(objects_array, prop, val) {
+export const getObj = function(objects_array, prop, val) {
     let retObj;
     if(objects_array){
         if(objects_array.length > 0){
@@ -206,7 +206,7 @@ const getObj = function(objects_array, prop, val) {
     }
     return retObj;
 }
-const updateObject = function(objects_array, prop, val, data) {
+export const updateObject = function(objects_array, prop, val, data) {
     if(objects_array){
         if(objects_array.length > 0){
             for(const i=0; i<objects_array.length; i++){
@@ -222,7 +222,7 @@ const updateObject = function(objects_array, prop, val, data) {
     }
     return objects_array;
 }
-const removeObjectByPropVal = function(objects_array, val, prop) {
+export const removeObjectByPropVal = function(objects_array, val, prop) {
     let retObj;
     if(objects_array.length > 0){
         for(let i=0; i<objects_array.length; i++){
@@ -235,25 +235,25 @@ const removeObjectByPropVal = function(objects_array, val, prop) {
         }
     }
 }
-const respWidth = function(width) {
+export const respWidth = function(width) {
     return ((window.innerWidth / 100) * width)+'px'
 }
-const respHeight = function(height) {
+export const respHeight = function(height) {
     return ((window.innerHeight / 100) * height)+'px'
 }
-const outerWidth = function(width) {
+export const outerWidth = function(width) {
     return ((window.outerWidth / 100) * width)+'px'
 }
-const outerHeight = function(height) {
+export const outerHeight = function(height) {
     return ((window.outerHeight / 100) * height)+'px'
 }
-const getObjectByPropName = function(obj, prop) {
+export const getObjectByPropName = function(obj, prop) {
     return false;
 }
-const inArray = function(el, array) {
+export const inArray = function(el, array) {
     return array.indexOf(el) > -1 ? true : false;
 }
-const delFromArray = function(el, array) {
+export const delFromArray = function(el, array) {
     let elIndex = array.indexOf(el);
     if(elIndex > -1){
         array.splice(elIndex, 1)
@@ -294,7 +294,7 @@ Array.prototype.unique = function() {
     return self.indexOf(value) === index;
   });
 }
-const trim = function (str) {
+export const trim = function (str) {
     if(str && typeof(str) == 'string')
         return str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
   };
@@ -305,7 +305,7 @@ const calc = {
     '-': function(a, b) { return a - b },
     '=': function(a, b) { return },
 };
-const cl = function(msg) {
+export const cl = function(msg) {
     console.log('msg', msg)
 }
 export default {
@@ -321,11 +321,11 @@ export default {
 	getBrowser,
 	getCustomerAddress,
 	getOrderAddress,
-    hasValue: hasValue,
-    hasArray: hasArray,
-    hasObject: hasObject,
-    forVal: forVal,
-    getBool: getBool,
+    hasValue,
+    hasArray,
+    hasObject,
+    forVal,
+    getBool,
     getNum,
     getObj,
     updateObject,
