@@ -1,3 +1,8 @@
+const isEmail = (email) => {
+    if(email && (typeof(email) == 'string') && email.length > 0){
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+    }
+}
 export const getDateIfValid = value => {
 	const date = Date.parse(value);
 	return isNaN(date) ? null : new Date(date);
@@ -331,6 +336,7 @@ export default {
     inArray,
     delFromArray,
     trim,
+    isEmail,
     calc,
     cl
 };
