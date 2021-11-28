@@ -158,15 +158,13 @@ export const getValue = function(obj, prop, def=false) {
     }
     return ret_val;
 }
-export function getString(obj, prop) {
+export function getString(str) {
     if(
-        !obj || !prop || 
-        typeof(obj) == 'object' || 
-        !obj?.[obj] || typeof(obj[prop])
+        !str || typeof(str) !== 'string'
     ){
         return '';
     }
-    return obj[prop];
+    return str;
 }
 export const getBool = function(bool) {
     if(bool){
