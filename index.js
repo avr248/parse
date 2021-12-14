@@ -29,6 +29,7 @@ export const getNumberIfValid = v => (isNumber(v) ? parseFloat(v) : null);
 export const getNumberIfPositive = v => getNumberIfValid(v) >= 0 && getNumberIfValid(v);
 
 export default {
+    getValue,
 	getString,
     getBasename,
 	getDateIfValid,
