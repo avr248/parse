@@ -28,6 +28,17 @@ export const getNumberIfValid = v => (isNumber(v) ? parseFloat(v) : null);
 
 export const getNumberIfPositive = v => getNumberIfValid(v) >= 0 && getNumberIfValid(v);
 
+export const getObj = (objects_array, prop, val) => {
+    if(objects_array && objects_array.length > 0){
+        for(let i=0; i<objects_array.length; i++){
+            if(objects_array[i].hasOwnProperty(prop) && objects_array[i][prop] == val){
+                return retObj = objects_array[i];
+            }
+        }
+    }
+    return false;
+}
+
 export default {
     getValue,
 	getString,
@@ -43,4 +54,5 @@ export default {
     getBool,
     inArray,
     isEmail,
+    getObj
 };
