@@ -10,7 +10,7 @@ export const isEmail = (e) => e && (typeof(e) == 'string') && e.length > 0 && /^
 
 export const inArray = (el, array) => array.indexOf(el) > -1 ? true : false;
 
-export const getValue = (o, p, d=false) => !o || !p || !typeof(o) == 'object' || !typeof(p) == 'string' || !o?.[p] ? d : o[p]
+export const getValue = (o, p, d=false) => !o || !p || !typeof(o) == 'object' || !typeof(p) == 'string' || !o[p] ? d : o[p]
 
 export const getString = (str) => !str || typeof(str) !== 'string' ? '' : str;
 
