@@ -32,7 +32,7 @@ export const getObj = (objects_array, prop, val) => {
     if(objects_array && objects_array.length > 0){
         for(let i=0; i<objects_array.length; i++){
             if(objects_array[i].hasOwnProperty(prop) && objects_array[i][prop] == val){
-                return retObj = objects_array[i];
+                return = objects_array[i];
             }
         }
     }
